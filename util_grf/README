@@ -1,0 +1,11 @@
+util_grf
+
+utility scripts for generating
+Gaussian random fields in 1D and 2D with prescribed covariance
+
+Matlab scripts provided by Miranda Holmes
+See notes ft_summary.pdf
+Reference:
+Buhler and Holmes-Cerfon (2009), J. Fluid Mech., v. 638, p. 5-26
+
+------------

@@ -1,0 +1,20 @@
+Scripts and data files associated with a lab developed by
+Zhong Lu, Franz Meyer, and Carl Tape
+University Alaska Fairbanks
+
+Estimation of magmatic source for InSAR interferogram
+
+The lab instructions and associated homework problems can be found at
+http://www.giseis.alaska.edu/input/carl/teaching/inverse/inv.html
+
+2017 instructions:
+radar.community.uaf.edu/lab-5-volcano-source-modeling-using-insar-data/
+
+Email Carl Tape (ctape@alaska.edu) if you have questions.
+
+These files are maintained on (private) github repository.
+
+The zipped version of files is made with the command
+zip -r mogi2insar.zip mogi
+
+---------

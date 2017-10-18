@@ -1,0 +1,13 @@
+README
+
+Files such as ex_2_1_2_uaf.m:
+These come with the CD from Aster. I have modified them slightly and have added _uaf to the file to distinguish these files from those on the CD.
+
+util_grf
+Directory for gaussian random fields (hw_cov, hw_iter)
+
+mogi
+Directory for Mogi volvanic source (hw_mogi)
+
+data
+miscellaneous data needed for some problems
