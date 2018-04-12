@@ -1,0 +1,63 @@
+% dvips -t letter lab_svd.dvi -o lab_svd.ps ; ps2pdf lab_svd.ps
+\documentclass[11pt,titlepage,fleqn]{article}
+
+\input{hw627_header}
+
+\renewcommand{\baselinestretch}{1.1}
+
+\newcommand{\vertgap}{\vspace{1cm}}
+
+% change the figures to ``Figure L3'', etc
+\renewcommand{\thefigure}{L\arabic{figure}}
+\renewcommand{\thetable}{L\arabic{table}}
+\renewcommand{\theequation}{L\arabic{equation}}
+\renewcommand{\thesection}{L\arabic{section}}
+
+%--------------------------------------------------------------
+\begin{document}
+%-------------------------------------------------------------
+
+\begin{spacing}{1.2}
+\centering
+{\large \bf Lab Exercise: SVD approach to ballistic problem} \\
+GEOS 627: Inverse Problems and Parameter Estimation, Carl Tape \\
+Last compiled: \today
+\end{spacing}
+
+%------------------------
+
+\subsection*{Overview}
+
+This is Problem 3 from Chapter 3 \citep{AsterE2}, revisiting Example~1.1, which was featured in our second problem set (\verb+hw_ch1.pdf+). Review the Example~1.1 and the solutions to the problem (if needed). In this lab we apply SVD to the same problem. See Chapter 3 (and notes) for background on SVD.
+
+%------------------------
+
+\subsection*{Aster Chapter 3, Problem 3}
+
+Using the parameter estimation problem described in Example~1.1 for determining the three parameters defining a ballistic trajectory, construct synthetic examples that demonstrate the following four cases using the SVD.
+
+In each case, display and interpret the SVD components $\bU$, $\bV$, and $\bS$ in terms of the rank, $p$, of your forward problem $\bG$ matrix. Display and interpret any model and data null space vector(s) and calculate model and data space resolution matrices.
+%
+\begin{enumerate}
+\item Three data points that are exactly fit by a unique model. \\
+Plot your data points and the predicted data for your model.
+
+\item Two data points that are exactly fit by an infinite suite of parabolas. \\
+Plot your data points and the predicted data for a suite of these models.
+
+\item Four data points that are only approximately fit by a parabola. \\
+Plot your data points and the predicted data for the least squares model.
+
+\item Two data points that are only approximately fit by any parabola, and for which there are an infinite number of least squares solutions. \\
+Plot your data points and the predicted data for a suite of least squares models.
+\end{enumerate}
+
+%-------------------------------------------------------------
+%\pagebreak
+\bibliographystyle{agu08}
+\bibliography{carl_abbrev,carl_main}
+%-------------------------------------------------------------
+
+%-------------------------------------------------------------
+\end{document}
+%-------------------------------------------------------------
