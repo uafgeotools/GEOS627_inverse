@@ -11,6 +11,7 @@ function [N,Nplot,centers] = plot_histo(hdat,edges,itype,make_plot)
 % Carl Tape, 1/1/2008
 
 hdat = hdat(:);
+barcolor = [1 1 1]*0.8;
 
 % default is to plot the histogram
 if nargin==3, make_plot=true; end
@@ -41,13 +42,20 @@ if make_plot
     ylabel(sprintf('%s (N=%i)',xlab,Ntotal));
 
     h = findobj(gca,'Type','patch');
-    set(h,'FaceColor',[0 1 1],'EdgeColor','k');
+    set(h,'FaceColor',barcolor,'EdgeColor','k');
 
     if length(hdat) ~= sum(N)
        warning('(plot_histo.m): You may want to extend the histogram edges -->');
        disp(sprintf(' there are %i/%i input that are outside the specified range',...
            length(hdat)-sum(N),length(hdat)));
        %disp(sprintf(' the number of input (%i) does not equal the sum of bin counts (%i).',length(hdat),sum(N)));
+    end
+    
+    % if the bin widths are different sizes, then matlab plots asterix symbols
+    % at the base of the bins (WHY?), so here we delete them
+    if length(unique(edges)) > 1
+        sh=findall(gcf,'marker','*');
+        delete(sh);
     end
 end
 
@@ -57,10 +65,3 @@ centers(end) = [];
 % (see histc), so we cut them
 N(end) = [];
 Nplot(end) = [];
-
-% if the bin widths are different sizes, then matlab plots asterix symbols
-% at the base of the bins (WHY?), so here we delete them
-if length(unique(edges)) > 1
-    sh=findall(gcf,'marker','*');
-    delete(sh);
-end
