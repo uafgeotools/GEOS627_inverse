@@ -1,0 +1,126 @@
+% dvips -t letter survey.dvi -o survey.ps ; ps2pdf survey.ps
+% pdflatex survey
+\documentclass[11pt,titlepage,fleqn]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage[round]{natbib}
+\usepackage{xspace}
+\usepackage{epsfig}
+\usepackage{bm}
+
+%--------------------------------------------------------------
+%       SPACING COMMANDS (Latex Companion, p. 52)
+%--------------------------------------------------------------
+
+\usepackage{setspace}    % double-space or single-space
+
+\renewcommand{\baselinestretch}{1.0}
+
+\textwidth 460pt
+\textheight 690pt
+\oddsidemargin 0pt
+\evensidemargin 0pt
+
+% see Latex Companion, p. 85
+\voffset     -50pt
+\topmargin     0pt
+\headsep      20pt
+\headheight   15pt
+\headheight    0pt
+\footskip     30pt
+\hoffset       0pt
+
+\include{carlcommands}
+
+\graphicspath{
+  {./figures/}
+}
+
+\pagestyle{empty}
+
+%--------------------------------------------------------------
+\begin{document}
+%-------------------------------------------------------------
+
+\noindent NAME: \line(1,0){150} \\
+\noindent \today \\
+%\noindent GEOS 627, Inverse Problems and Parameter Estimation, Carl Tape
+\noindent GEOS 626, Applied Seismology, Carl Tape
+
+\noindent
+%{\bf Purpose}: I'd like to collect some basic information about each of you, in order to adapt the course materials.
+
+\subsection*{Background information}
+
+Please {\bf circle} your answer where options are provided.
+
+\begin{enumerate}
+\item What was (or is) your undergraduate degree? \line(1,0){150}
+
+\item What degree are you pursuing? BS . MS . PhD
+
+\noindent
+What program (\eg solid-earth option of Geophysics)? \line(1,0){150}
+
+\item What year are you? $\;\;$ U3 . U4 . G1 . G2 . G3 . G4 . G5 . G5+
+
+The `G' refers to your years at UAF. If you have a previous master's degree, please list the field of study and thesis title here.
+
+\noindent \line(1,0){400}
+
+\item If you are a graduate student, what is your topic or your (projected) thesis title?
+
+\noindent \line(1,0){400}
+
+\noindent Who is your primary advisor? \noindent \line(1,0){150}
+
+\item Previous courses. Please list any classes you have taken that covered
+% 627
+%inverse problems or parameter estimation.
+% 626
+seismology (or inverse problems).
+
+\begin{tabular}{l|l|l}
+\hline
+course name & year taken & university \\ \hline\hline
+calculus with vectors & & \hspace{3cm} \\ \hline
+linear algebra & & \\ \hline
+\hspace{8cm}  & & \\ \hline
+ & & \\ \hline
+% & & \\ \hline
+\end{tabular}
+
+\item What is your typical computing environment? desktop laptop
+
+\item What is your typical computing platform? Mac Windows Linux
+
+\item Have you used a linux/unix environment before? Y N
+
+\item Status of your account on the UAF Seismology Linux Network:
+
+\begin{enumerate}
+\item I have an active account.
+\item I have account but it may or may not be active.
+\item I have no account; my preferred username is \line(1,0){100}
+\end{enumerate}
+
+\item Have you used ssh or some comparable remote log-in before? Y N
+
+\item Describe your experience with computer programming, if any.
+
+\vspace{0.5cm}
+
+
+\item If there is a particular topic of
+% 672
+%inverse theory
+% 626
+seismology
+that you'd like to see covered, feel free to list it here.
+\end{enumerate}
+
+%-------------------------------------------------------------
+\end{document}
+%-------------------------------------------------------------
