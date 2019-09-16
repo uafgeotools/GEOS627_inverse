@@ -29,7 +29,7 @@ Last compiled: \today
 \subsection*{Overview}
 
 \begin{itemize}
-\item The purpose of this exercise is to understand one particular method of generating samples from an arbitrary probability distribution. The sampling method, known as the {\em rejection method}, was introduced by \citet{vonNeumann1951} and is also discussed in Section 2.3.2 of \citet{Tarantola2005}.
+\item The purpose of this exercise is to understand one particular method of generating samples from an arbitrary probability distribution. The sampling method, known as the {\em rejection method}, was introduced by \citet{vonNeumann1951} and is also discussed in Section 2.3.2 of \citet{Tarantola2005}. One example of its application can be found in \citet{SilwalTape2016} for the case of a three-dimensional model parameter space defining the orientation of a earthquake source mechanism.
 
 We use the rejection method to generate samples of an arbitrary distribution. As far as I know, there is no such function in Matlab to do this. (Let me know if you find one!)
 %    http://www.mathworks.com/help/stats/common-generation-methods.html#br5k9hi-4
@@ -56,7 +56,7 @@ cp lab_sampling_template.m lab_sampling.m
 
 %-------------------------------------------------------------
 \bibliographystyle{agu08}
-\bibliography{carl_abbrev,carl_main,carl_calif,carl_alaska,carl_source}
+\bibliography{carl_abbrev,carl_him,carl_main,carl_calif,carl_alaska,carl_source}
 %-------------------------------------------------------------
 
 %------------------------
@@ -65,6 +65,10 @@ cp lab_sampling_template.m lab_sampling.m
 \subsection*{Exercises}
 
 \begin{enumerate}
+\item Review \verb+lab_linefit.m+. What does the Matlab function \verb+randn+ do? Describe how the histogram plotted achieves its shape.
+
+\vertgap
+
 \item What does the Matlab function \verb+rand+ do? Write a command to return a set of $n$ numbers that are uniformly distributed on the interval $[a,b]$.
 
 \vertgap

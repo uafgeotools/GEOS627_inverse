@@ -152,7 +152,7 @@ Pplot = reshape(pplot,ny,nx);
 figure; pcolor(X,Y,Pplot); shading flat;
 % OPTION B -- pass matrix to p(), then plot as matrix
 Fplot = p(X,Y);
-figure; pcolor(X,Y,Pplot); shading flat;
+figure; pcolor(X,Y,Fplot); shading flat;
 % OPTION C -- plot as vector
 figure; scatter(x,y,4^2,pplot,'fill');
 

@@ -2,9 +2,9 @@
 % epicenter.m
 % Tarantola 2005, Problem 7.1
 %
-% Be sure to understand lab_epi.m before starting this problem.
+% Be sure to understand lab_sampling.m before starting this problem.
 %
-% Carl Tape 1/30/2013
+% Carl Tape 2013-01-30
 %
 
 clear, close all, clc
