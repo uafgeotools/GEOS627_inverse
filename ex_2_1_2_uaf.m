@@ -4,9 +4,7 @@
 % by R. Aster, B. Borchers, C. Thurber
 %
 
-clear
-close all
-clc
+clear, close all, clc
 
 % USER CHOICE
 PCONF = 0.95;
@@ -17,14 +15,14 @@ load([ddir 'data1.mat']);
 t = data1(:,1);
 y = data1(:,2);
 sigvec = data1(:,3);
-N = length(t);
-M = 3;
+ndata = length(t);
+nparm = 3;
 
 disp('displaying t, y, sigma')
 [ t y sigvec ]
 
 % build the parabolic system matrix
-G = [ ones(N,1) t -0.5*t.^2 ];
+G = [ ones(ndata,1) t -0.5*t.^2 ];
 
 % apply the weighting
 yw = y ./ sigvec;
@@ -49,7 +47,7 @@ dm = DELTA*sqrt(diag(covm));
 [m-dm  m  m+dm]
 
 % N-M degrees of freedom
-dof = N-M;
+dof = ndata-nparm;
 disp(sprintf('Chi-square misfit for %i degrees of freedom (dof)',dof));
 chi2 = norm((y - G*m)./sigvec)^2
 %chi2 = norm(yw - Gw*m)^2
@@ -97,7 +95,7 @@ mmc = zeros(3,nsamp);
 chimc = zeros(nsamp,1);
 for ii = 1:nsamp
   % Generate a trial data set of perturbed, weighted data
-  ytrial = y0 + sigvec.*randn(N,1);
+  ytrial = y0 + sigvec.*randn(ndata,1);
   ywtrial = ytrial./sigvec;
   mtrial = Gw\ywtrial;
   % Eq. 2.19
@@ -114,7 +112,7 @@ for ii=1:3
     subplot(nr,nc,ii);
     [B,Bplot] = plot_histo(chimc,[0:dbin:xmax],ii);
     sum(Bplot)*dbin  % check
-    xlabel('\chi_{obs}^2');
+    xlabel('chi_{obs}^2');
     xlim([0 xmax]); if ii==3, ylim([0 ymax]); end
 end
 
@@ -124,8 +122,8 @@ dx = xx(2)-xx(1);
 chitheo = chi2pdf(xx,dof);
 sum(chitheo)*dx
 plot(xx,chitheo,'r','linewidth',2);
-title(sprintf('PDF for \\chi^2(\\nu=%i, x)',dof))
-%ylabel(sprintf('PDF for \\chi^2(\\nu=%i, x)',dof))
+title(sprintf('PDF for chi^2(nu=%i, x)',dof))
+%ylabel(sprintf('PDF for chi^2(nu=%i, x)',dof))
 %xlabel('x')
 axis([0 xmax 0 ymax]);
 
