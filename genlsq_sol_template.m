@@ -3,16 +3,12 @@
 % Carl Tape, GEOS 627, Inverse Problems and Parameter Estimation
 %
 % Demonstration of the iterative quasi-Newton method for a 4-parameter
-% inversion for epicenter, origin time, and velocity.
-%
-% This is a simplified version of optimization.m
+% inversion for epicenter (xs, ys), origin time, and velocity.
 %
 % calls forward_epicenter.m, plot_epicenters.m, plot_covsamples.m
 %
 
-clc
-clear
-close all
+clc, clear, close all
 format compact
 format short
 
@@ -127,7 +123,15 @@ disp(stS0);
 if iforward==2
     % regular grid of epicenters
     numx = 50;
-    [xvec,yvec,numy,a,b,dx] = gridvec(xmin,xmax,numx,ymin,ymax);
+    xvec0 = linspace(xmin,xmax,numx);
+    dx = xvec0(2) - xvec0(1);
+    yvec0 = [ymin : dx : ymax];
+    [X,Y] = meshgrid(xvec0,yvec0);
+    [a,b] = size(X);
+    xvec = reshape(X,a*b,1);
+    yvec = reshape(Y,a*b,1);
+    numy = length(yvec0);
+    % compute the misfit for each epicenter
     ng = length(xvec);
     sd0 = NaN(ng,1);
     sm0 = NaN(ng,1);
@@ -148,7 +152,7 @@ if iforward==2
     caxis([cmin max(s0)]); colorbar; axis equal, axis(axepi); title('Sd(m)');
     subplot(nr,nc,3); pcolor(X,Y,reshape(sm0,a,b)); shading flat;
     caxis([cmin max(sm0)]); colorbar; axis equal, axis(axepi); title('Sm(m)');
-    % for this file: ps2eps -f misfit_f2.ps
+    % for this file: ps2eps -f genlsq_misfit_f2.ps
     if bprint, print(gcf,'-dpsc',sprintf('%sgenlsq_misfit_f%i',pdir,iforward)); end
 end
 
@@ -177,28 +181,33 @@ stlabels2 = {'none','newton','quasi','steepest','cg','cgpoly','vmmatrix','vmvect
 stmethod = stlabels2{imethod+1};
 
 for nn = 1:niter
-    %///////////////////////////////
-    disp([' iteration ' num2str(nn) ' out of ' num2str(niter) ]);
+    disp(sprintf('iteration %i out of %i',nn,niter));
     m     = mnew;
+    
+    % steepest ascent vector (Eq. 6.307 or 6.312)
     delta = d(m);
     Ga    = G(m);
-
-    % update the model: Tarantola (2005), Eq 6.319
-    % (the line-search parameter is assumed to be nu = 1)
-    Hhat  = icprior + Ga'*icobs*Ga;                           % approximate Hessian
-    ghat  = Ga'*icobs*(delta - dobs) + icprior*(m - mprior);  % gradient
-    dm    = -Hhat\ghat;     % model update
-    mnew  = m + dm;         % new model
+    g     = cprior*Ga'*icobs*(delta - dobs) + (m - mprior);
+    
+    %//////////////////////////////////////////////////
+    % QUASI-NEWTON ALGORITHM -- CHANGE THIS BLOCK FOR OTHER ALGORITHMS
+    
+    % curvature operator (Eq. 6.288)
+    H  = eye(nparm) + cprior*Ga'*icobs*Ga;
+    
+    % model update
+    dm   = -H\g;
+    mnew = m + dm;
+    %//////////////////////////////////////////////////
 
     % misfit function for new model
     % note: book-keeping only -- not used within the algorithm above
     Sd_vec(nn+1) = Sd(mnew,dobs,icobs);
     Sm_vec(nn+1) = Sm(mnew,mprior,icprior);
-    S_vec(nn+1)  = S(mnew,dobs,mprior,icobs,icprior);
+    S_vec(nn+1) = S(mnew,dobs,mprior,icobs,icprior);
 
     disp(sprintf('%i/%i : prior, current, target:',nn,niter));
     disp([mprior mnew mtarget]);
-    %///////////////////////////////
 end
 
 % misfit function values
