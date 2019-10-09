@@ -11,9 +11,9 @@
 
 \begin{spacing}{1.2}
 \centering
-{\large \bf Problem Set 5: Iterative methods with generalized least squares [Part B]} \\
+{\large \bf Problem Set 5: Iterative methods with generalized least squares, Part B [iterB]} \\
 GEOS 627: Inverse Problems and Parameter Estimation, Carl Tape \\
-Assigned: February 20, 2017 --- Due: March 6, 2017 \\
+Assigned: September 30, 2019 --- Due: October 9, 2019 \\
 Last compiled: \today
 \end{spacing}
 
@@ -155,7 +155,7 @@ Solve the problem using the quasi-Newton method with eight iterations.
 \left(\bem - \bem_{\rm post} \right)^T \bC_{\rm post}^{-1} \left(\bem - \bem_{\rm post} \right) \le \Delta^2
 \end{equation*}
 %
-describes the interior region of an $M$-dimensional ellipsoid (in our case, $M=2$). For example, $\Delta^2$ can be chosen to represent the boundary of the $95\%$ confidence region.
+describes the interior region of an $\nparm$-dimensional ellipsoid (in our case, $\nparm=2$). For example, $\Delta^2$ can be chosen to represent the boundary of the $95\%$ confidence region.
 %
 \begin{enumerate}
 \item (0.1) Use \verb+eig+ to compute the eigen-decomposition of $\bC_{\rm post}$.

@@ -11,9 +11,9 @@
 
 \begin{spacing}{1.2}
 \centering
-{\large \bf Problem Set 5: Iterative methods with generalized least squares [Part A]} \\
+{\large \bf Problem Set 5: Iterative methods with generalized least squares, Part A [iterA]} \\
 GEOS 627: Inverse Problems and Parameter Estimation, Carl Tape \\
-Assigned: February 20, 2017 --- Due: March 6, 2017 \\
+Assigned: September 30, 2019 --- Due: October 9, 2019 \\
 Last compiled: \today
 \end{spacing}
 
@@ -26,11 +26,11 @@ Last compiled: \today
 
 \item {\bf Problem 1.} In HW4 you explored Gaussian random fields with prescribed covariance (exponential or Gaussian) for a 1D spatial field. This problem deals with 2D Gaussian random fields. Your goal is to understand how these fields are generated, and to get some intuitive sense for how certain parameters change the appearance of the 2D fields.
 
-The Matlab scripts for computing Gaussian random fields in the frequency domain were provided by Miranda Holmes, who wrote them as part of the study \citet{BuhlerHolmes2009}. She also wrote a useful set of notes, ``Generating stationary Gaussian random fields,'' which is available as \verb+ft_summary.pdf+ in the same directory containing the Matlab scripts (\verb+~/inv2017/util_grf/+).
+The Matlab scripts for computing Gaussian random fields in the frequency domain were provided by Miranda Holmes, who wrote them as part of the study \citet{BuhlerHolmes2009}. She also wrote a useful set of notes, ``Generating stationary Gaussian random fields,'' which is available as \verb+ft_summary.pdf+ in the same directory containing the Matlab scripts (\verb+~/+\repodir\verb+/util_grf/+).
 
 Why do we care about the statistical characteristics of spatial random fields? Because real systems have complex variations that we would like to quantify in simpler terms. \citet{Gneiting2012} examined several different covariance functions, including the Matern family, which includes the Gaussian and exponential functions, and they illustrate their technique with line transects of arctic sea ice.
 
-\item {\bf Problem 2.} Iterative methods are needed for nonlinear problems, which are characterized by a nonlinear forward model $\bg(\bem)$. In many problems it is not computationally feasible to evaluate the misfit function dozens of times, let alone millions (or billions) of times needed to cover the $M$-dimensional model space. The basic strategy is to evaluate the misfit function at one point, then use the gradient (and Hessian) at that point to guide the choice of the next point. This problem will build upon the lab exercie \verb+lab_iter.pdf+.
+\item {\bf Problem 2.} Iterative methods are needed for nonlinear problems, which are characterized by a nonlinear forward model $\bg(\bem)$. In many problems it is not computationally feasible to evaluate the misfit function dozens of times, let alone millions (or billions) of times needed to cover the $\nparm$-dimensional model space. The basic strategy is to evaluate the misfit function at one point, then use the gradient (and Hessian) at that point to guide the choice of the next point. This problem will build upon the lab exercie \verb+lab_iter.pdf+.
 
 \item {\bf Problem 3.} Here we revisit \citet{Tarantola2005}, Problem 7-1. See HW3 for background.
 
