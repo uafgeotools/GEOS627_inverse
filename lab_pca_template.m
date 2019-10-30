@@ -9,7 +9,7 @@ clc, clear, close all
 
 % load the data, compute correlations, and make scatterplots
 load_pca_data;
-[n,p] = size(X);
+[ndata,nparm] = size(X);
 xinds = [1:p];    
 
 % scatterplot matrix: uncentered, unstandardized

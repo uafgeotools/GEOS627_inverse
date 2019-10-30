@@ -5,9 +5,7 @@
 % Estimate density variations using singular value decomposition.
 %
 
-clear
-close all
-clc
+clear, close all, clc
 
 % vector of gravity observations
 d = [
@@ -27,18 +25,18 @@ d = [
    1.333121959786504
    0.949130251286033 ];
 
-m = length(d);  % number of data
-n = m;          % number of model parameters
+ndata = length(d);  % number of data
+nparm = ndata - 1;  % number of model parameters
 
 % construct discretization vector for model (density)
 ximin = 0;
 ximax = 1;
-xivec = collocate(ximin,ximax,n);
+xivec = collocate(ximin,ximax,nparm);
 
 % construct discretization vector for data (gravity)
 xmin = 0;
 xmax = 1;
-xvec = collocate(xmin,xmax,m);
+xvec = collocate(xmin,xmax,ndata);
 
 whos xvec xivec d
 
