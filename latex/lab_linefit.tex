@@ -25,6 +25,7 @@ Last compiled: \today
 
 %------------------------
 
+\vspace{-0.5cm}
 \subsection*{Overview}
 
 The objective of this lab is to introduce the concepts of forward and inverse problems by exploring the example of fitting a line to scattered data. We also want to develop some basic capabilities in Matlab, such as vector-matrix operations and plotting.
@@ -32,6 +33,12 @@ The objective of this lab is to introduce the concepts of forward and inverse pr
 \begin{enumerate}
 \item Write down the forward model $d_i = m_1 + m_2 x_i$ in schematic matrix form $\bd = \bG\bem$.
 
+\vertgap
+\vertgap
+
+\item Show that minimizing the least squares misfit function (\ie sum of squares of residuals) leads to the solution $\bem = (\bG^T\bG)^{-1}\bG^T\dvec$ (see \verb+notes_taylor.pdf+).
+
+\vertgap
 \vertgap
 \vertgap
 
@@ -66,7 +73,7 @@ How does it change if you set $\sigma = 0$?
 
 \vertgap
 
-\pagebreak
+%\pagebreak
 \item Now comment out the outlier. Comment out the \verb+break+ statement, then run the last block of code. Make sure you understand what is being plotted and how it is calculated.
 %
 \begin{itemize}
@@ -81,12 +88,13 @@ How does it change if you set $\sigma = 0$?
 variable & matlab variable  & dimension      & description \\ \hline\hline
          & \verb+dobs+     &                &              \\ \hline
          & \verb+G+        &                &              \\ \hline
-F(\bem)  & \verb+RSS+      &                &              \\ \hline
+$\misfitvar(\bem)$  & --              &                &              \\ \hline
 ---      & \verb+RSSm+     &                &              \\ \hline
 \bem     & \verb+mtry+     & $2 \times 1$   & \hspace{3cm} \\ \hline
          & \verb+dtry+     &                &              \\ \hline
          & \verb+res+      &                &              \\ \hline
-\bgamma(\bem)  & \verb+gammam+ & $2 \times n_g$ & gradient of misfit function \\ \hline
+\bgamma(\bem)  & --        & $2 \times 1$   & gradient of misfit function \\ \hline
+--       & \verb+gammam+   & $2 \times n_g$ &  \\ \hline
 \end{tabular}
 
 \item Referring to the class notes ``Taylor series and least squares'' (\verb+notes_taylor.pdf+) compute the gradient $\bgamma(\bem)$ for the same grid of $\bem$ that was used to plot the misfit function.
@@ -112,11 +120,8 @@ Bonus: Use \verb+surf+ to plot $\|\bgamma(\bem)\|$. What shape is it?
 
 \vertgap
 
-\item What is the dependence of the Hessian on the model, $\bH(\bem)$?
+\item What is the dependence of the Hessian on the model, $\bH(\bem)$? \\
 % Hessian does not depend on m
-
-\vertgap
-
 What does that imply about $F(\bem)$?
 % it is strictly quadratic
 
