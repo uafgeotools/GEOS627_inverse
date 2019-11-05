@@ -52,17 +52,17 @@ Calculate the following by hand:
 \item $\bb \ba^T$
 \end{itemize}
 
-\item Use \verb+randn+ to generate $P$ samples of $M \times 1$ vectors $\bw$ that have unit covariance, $\bC = \bI$.
+\item Use \verb+randn+ to generate $\nsample$ samples of $\nparm \times 1$ vectors $\bw$ that have unit covariance, $\bC = \bI$.
 This means that the entries of $\bw$ will have mean $\mu \approx 0$ and standard deviation $\sigma \approx 1$. \\
-Use $P = 500$ and $M = 100$.
+Use $\nsample = 500$ and $\nparm = 100$.
 
-It may help to think of sample $\bw_p$ as a profile of a topographic transect or as a seismogram; in any case, there are $M$ discretization points per sample. You have $P$ samples.
+It may help to think of sample $\bw_p$ as a profile of a topographic transect or as a seismogram; in any case, there are $\nparm$ discretization points per sample. You have $\nsample$ samples.
 
-\item Using \verb+plot_histo.m+, plot histograms of 12 or so $\bw$ to convince yourself that each $\bw$ appears to be a Gaussian distribution with $\mu \approx 0$ and $\sigma \approx 1$. (You can increase $M$ to make this more clear.)
+\item Using \verb+plot_histo.m+, plot histograms of 12 or so $\bw$ to convince yourself that each $\bw$ appears to be a Gaussian distribution with $\mu \approx 0$ and $\sigma \approx 1$. (You can increase $\nparm$ to make this more clear.)
 
-\item Calculate the mean sample $\bar{\bw}$ for the set of $P$ samples. Make sure it is $M \times 1$.
+\item Calculate the mean sample $\bar{\bw}$ for the set of $\nsample$ samples. Make sure it is $\nparm \times 1$.
 
-\item Using a for loop, calculate the estimated covariance matrix \verb+Csamp+ for the set of $P$ samples.
+\item Using a for loop, calculate the estimated covariance matrix \verb+Csamp+ for the set of $\nsample$ samples.
 
 \item Check that your \verb+Csamp+ matches what you get when you use Matlab's \verb+cov+ function.
 
@@ -74,11 +74,8 @@ To make the comparison, use these commands for each plot: \\
 
 \item Plot the residual between the two matrices. Use \verb+caxis(0.1*[-1 1])+ \\
 Is the residual matrix symmetric? Why or why not?
-% R = C - I, R^T = (C - I)^T = C^T - I^T = C^T - I
-% C = C^T by applying the transpose to the expression in notes_tarantola.pdf
 
-\item Explain why the matrix-square-root method would give the same kinds of samples as the method above. In other words, given an $M \times M$ covariance matrix $\bC$, how can you generate an $M \times M$ representative sample $\bx$? (And what happens if $\bC = \bI$?)
-% notes_tarantola.pdf: x = Lw, so if C = LL^T and C=I, then L=I and x = w
+\item Explain why the matrix-square-root method would give the same kinds of samples as the method above. In other words, given an $\nparm \times \nparm$ covariance matrix $\bC$, how can you generate an $\nparm \times \nparm$ representative sample $\bx$? (And what happens if $\bC = \bI$?)
 
 \end{enumerate}
 

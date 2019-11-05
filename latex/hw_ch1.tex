@@ -46,6 +46,7 @@ Hints:
 
 %--------------------------------------------------------------
 
+\clearpage\pagebreak
 \subsection*{Problem 2 (2.0). Aster 1-2 modified.}
 
 Consider the ballistic problem in Section 1.2.
@@ -81,16 +82,21 @@ m_1 \\ m_2 \\ m_3
 &=& 
 \left[
 \begin{array}{c}
-y_1 \\ \vdots \\ y_\ndata
+y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_\ndata
 \end{array}
 \right]
 \end{eqnarray}
 %
-Let $\ndata = \nparm = 3$ in this problem, that is, {\bf there are $\ndata=3$ people to make measurements of the trajectory.}
-We will assume that a ball is being shot from elevation $m_1$ (say, from the middle floor of a high-rise building) with vertical velocity $m_2$ in an environment with vertical acceleration given by $m_3$.
-Ignore realistic influences such as air friction.
-Each person will make one measurement of $(t_i,y_i)$; the measurement, like any measurement, should {\bf not} be assumed to be accurate (\i without any error).
-After the experiment, the measurements are tabulated.
+Let $\ndata = \nparm = 3$ in this problem: {\bf there are $\ndata=3$ people, and each person makes one measurement $(t_i,y_i)$ of the height $y_i$ of the ball at time $t_i$.} Assumptions:
+%
+\begin{itemize}
+\item A ball is being shot from elevation $m_1$ (say, from the middle floor of a high-rise building) with vertical velocity $m_2$ in an environment with vertical acceleration given by $m_3$.
+\item The influence of the ball's height on acceleration is negligible.
+\item Realistic influences such as air friction are negligible.
+\item Each user's measurement $(t_i,y_i)$ may have error (\ie is not accurate).
+\end{itemize}
+%
+After the experiment, the three measurements are tabulated.
 Your task is to solve for the $\nparm=3$ unknowns $m_1, m_2, m_3$.
 %
 \begin{enumerate}
@@ -149,7 +155,7 @@ D = (t_1-t_2)(t_1-t_3)(t_2-t_3).
 
 %--------------------------------------------------------------
 
-\pagebreak
+%\pagebreak
 \subsection*{Problem 3a (1.0). Aster 1-3 modified.}
 
 Consider the borehole vertical seismic profile problem of Examples 1.3 and 1.9. Consider the continuous version of the problem, represented by Eq. (1.20):

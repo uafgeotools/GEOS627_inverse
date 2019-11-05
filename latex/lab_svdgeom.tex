@@ -32,7 +32,7 @@ The objective of this lab is to reinforce the geometrical concept of SVD \citep{
 Following \verb+notes_svd.pdf+, \refFig{fig:2D} shows four examples of different ($2 \times 2$) $\bG$ representing the SVD.
 
 \begin{enumerate}
-\item Using \refFig{fig:ex1}, estimate $\bU$, $\bV$, $\bS$, and then calculate $\bG$.
+\item Using \refFig{fig:ex1}, estimate $\Ucolor$, $\Vcolor$, $\bS$, and then calculate $\bG$.
 %(The prime notation is to distinguish your estimated matrices from the true matrices.)
 
 If your entries of $\bG$ are not close to integer values, please try again.
@@ -51,7 +51,7 @@ Measuring the coordinates of two basis vectors will not guarantee that the two v
 %
 This can be implemented as a Matlab in-line function. Provide a $\theta$, then the columns of $\bR_\theta$ will be the rotated standard basis vectors.
 
-To get $\bU$ and $\bV$, use $\bR_\theta$. You may also want to use
+To get $\Ucolor$ and $\Vcolor$, use $\bR_\theta$. You may also want to use
 %
 \begin{equation}
 \bZ = \left[
@@ -70,21 +70,23 @@ since $\bA\bZ$ will swap the two column vectors of $\bA$.
 \item In the {\bf top} of \refFig{fig:ex1}, sketch $\be_1$ and $\be_2$ in the left plot. \\
 Sketch $\bG\be_1$ and $\bG\be_2$ in the right plot.
 
-\item The {\bf bottom} of \refFig{fig:ex1} represents the mapping from $\bG^{\dagger}\bU$. Sketch the following (note that you do not need $\bG^{\dagger}$ for the sketch):
+\item The {\bf bottom} of \refFig{fig:ex1} represents the mapping from $\bG^{\dagger}\Ucolor$. Sketch the following (note that you do not need $\bG^{\dagger}$ for the sketch):
 %
 \begin{itemize}
 \item $\bu_1$ and $\bu_2$ in the left plot
 \item appropriately scaled versions of $\bv_1$ and $\bv_2$ in the right plot
-\item the ellipse representing $\bG^{\dagger}\bU$ in the right plot
+\item the ellipse representing $\bG^{\dagger}\Ucolor$ in the right plot
 \end{itemize}
 
-\item Using Matlab's \verb+svd+, calculate $\bU$, $\bV$, and $\bS$, and then calculate $\bG^{\dagger}$. \\
+\item Using Matlab's \verb+svd+, calculate $\Ucolor$, $\Vcolor$, and $\bS$, and then calculate $\bG^{\dagger}$. \\
 Sketch $\be_1$ and $\be_2$ in the lower left plot. \\
 Sketch $\bG^{\dagger}\be_1$ and $\bG^{\dagger}\be_2$ in the lower right plot.
 
 \item Does $\bG^{\dagger} = \bG^{-1}$? Why?
 
-\item Compute the eigenbasis and then sketch $\{\bh_1,\bh_2\}$ and $\{\bG\bh_1,\bG\bh_2\}$ in your plot.
+\item Compute the eigenbasis of $\bG$ and then sketch eigenvectors $\{\bh_1,\bh_2\}$ and $\{\bG\bh_1,\bG\bh_2\}$ in your top plots.
+
+Note: You can't sketch the eigenvectors if they are complex.
 
 \item Get some more practice with three more examples in \refFigab{fig:ex2}{fig:ex4}.
 
@@ -94,9 +96,9 @@ Try a few different $\bG$ to see what happens. \\
 You may want to try the four examples in \verb+notes_svd.pdf+. \\
 Check that your $\bG$ will generate \refFig{fig:ex1}.
 
-\item The top of \refFig{fig:ex1} represents $\bV \rightarrow \bG \rightarrow \bU$.
+\item The top of \refFig{fig:ex1} represents $\Vcolor \rightarrow \bG \rightarrow \Ucolor$.
 
-Write some code to generate a plot representing $\bU \rightarrow \bG^{\dagger} \rightarrow \bV$. Stick to the coloring convention for $\bU$ and $\bV$.
+Write some code to generate a plot representing $\Ucolor \rightarrow \bG^{\dagger} \rightarrow \Vcolor$. Stick to the coloring convention for $\Ucolor$ and $\Vcolor$.
 
 \end{enumerate}
 
@@ -162,7 +164,7 @@ Example 4.
 \end{tabular}
 \caption[]
 {{
-The matrix $\bG = \textcolor{red}{\bU}\,\bS\,\textcolor{blue}{\bV}^T$ transforms the orthonormal basis vectors \textcolor{blue}{$\{\bv_i\}$} to the orthogonal vectors \textcolor{red}{$\{s_i\bu_i\}$}: \makebox{$\bG\textcolor{blue}{\bV} = \textcolor{red}{\bU}\,\bS$}.
+The matrix $\bG = \Ucolor\,\bS\,\Vcolor^T$ transforms the orthonormal basis vectors \textcolor{blue}{$\{\bv_i\}$} to the orthogonal vectors \textcolor{red}{$\{s_i\bu_i\}$}: \makebox{$\bG\Vcolor = \Ucolor\,\bS$}.
 \label{fig:2D}
 }}
 \end{figure}

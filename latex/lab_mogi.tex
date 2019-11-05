@@ -3,7 +3,7 @@
 
 \input{hw627_header}
 
-\renewcommand{\baselinestretch}{1.0}
+%\renewcommand{\baselinestretch}{1.0}
 
 % change the figures to ``Figure L3'', etc
 \renewcommand{\thefigure}{L\arabic{figure}}
@@ -50,7 +50,7 @@ Interferogram used in this lab exercise. This is Okmok volcano, which is the nor
 
 \begin{itemize}
 \item The goal of this lab is to understand the principles of InSAR processing and inverse problems. 
-\textcolor{red}{\bf No Matlab or data are needed to answer the lab questions.}
+\textcolor{red}{\bf No Matlab or data are needed to answer the lab questions, though computer plotting may be helpful.}
 
 \item Lab time:
 %
@@ -192,7 +192,7 @@ We represent a \textcolor{red}{\bf forward problem} as
 %
 where $\bg(\cdot)$ describes the forward model in \refEq{forward}, $\bem$ is the (unknown) Mogi model, and $\bd$ is the predicted interferogram.
 
-The \textcolor{red}{\bf inverse problem} seeks to determine the optimal $\bem$ that minimizes the differences between predictions $\bg(\bem)$ and observations $\bd^{\rm obs}$.
+The \textcolor{red}{\bf inverse problem} seeks to determine the optimal $\bem$ that minimizes the differences between predictions $\bg(\bem)$ and observations $\dvec$.
 
 %---------------
 
@@ -226,7 +226,7 @@ Sketch (or plot) $u_x(x)$ (the $x$-component of displacement) and $u_z(x)$ (the 
 
 \end{enumerate}
 
-\item What are the entries of the data vector $\bd^{\rm obs}$?
+\item What are the entries of the data vector $\dvec$?
 
 \vspace{1.5cm}
 
@@ -239,7 +239,7 @@ Is it linear with any of the source parameters?
 
 \vspace{1cm}
 
-\item Define a misfit function that will minimize the sum of squares of the differences between a vector of observations, $\bd^{\rm obs}$, and a vector of predictions, $\bg(\bem)$. 
+\item Define a misfit function that will minimize the sum of squares of the differences between a vector of observations $\dvec$ and a vector of predictions $\bg(\bem)$. 
 
 \vspace{1cm}
 
@@ -255,9 +255,9 @@ Is it linear with any of the source parameters?
 \end{enumerate}
 
 %-------------------------------------------------------------
-\pagebreak
+%\pagebreak
 \bibliographystyle{agu08}
-\bibliography{carl_abbrev,carl_main,carl_source,carl_him,carl_alaska}
+\bibliography{carl_abbrev,carl_main,carl_source,carl_him,carl_alaska,carl_gps}
 %-------------------------------------------------------------
 
 %-------------------------------------------------------------

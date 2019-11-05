@@ -54,11 +54,11 @@ Run \verb+covrand2D.m+, which will generate 1000 samples of a 2D Gaussian random
 
 Compute and plot the sample mean $\bmu_{1000}$ with a colorbar.
 
-Throughout this problem, when plotting samples, use the same plotting commands\footnote{If you are not using Matlab, then they key points when plotting are to not distort the shape of the samples and to use a color scale that ranges between $-3\sigma$ and $+3\sigma$.}:
+Throughout this problem, when plotting samples, use the same plotting commands\footnote{If you are not using Matlab, then the key points when plotting are to not distort the shape of the samples and to use a color scale that ranges between $-3\sigma$ and $+3\sigma$.}:
 
 \verb+axis equal, axis(ax1aex), caxis(3*sigma*[-1 1])+
 
-\item (0.3) Open \verb+xy2distance.m+\footnote{This is in the subfolder {\tt util$\_$grf}, which will be in your Matlab path (type {\tt open xy2distance}) if you ran {\tt covrand2D.m} in the previous problem.}, set \verb+idisplay=1+, then run the example at the bottom.
+\item (0.3) Open \verb+xy2distance.m+ (note \footnote{This is in the subfolder {\tt util$\_$grf}), which will be in your Matlab path (type {\tt open xy2distance}) if you ran {\tt covrand2D.m} in the previous problem.}, set \verb+idisplay=1+, then run the example at the bottom.
 %
 \begin{enumerate}
 \item (0.0) Explain how the points are ordered within the distance index matrix \verb+iD+.
@@ -102,9 +102,7 @@ Hint: \verb+plot(iD*dx,C,'r.')+ is one way to plot $C(d)$.
 \item Explain the impact of changing \verb+idouble+ on the samples.
 \end{enumerate}
 %
-(After you are done, be sure to reset \verb+idouble=1+.)
-
-From here on out, we will use \verb+idouble=1+.
+After you are done, reset \verb+idouble=1+; from here on out, we will use \verb+idouble=1+.
 
 \item (0.2) Compute the mean and standard deviation of each sample from the set of 1000 samples. Plot the means and standard deviations as two histograms.
 

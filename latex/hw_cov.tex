@@ -63,11 +63,11 @@ Last compiled: \today
 \begin{enumerate}
 
 % XXX MAKE THIS PROBLEM WORTH MORE POINTS IN THE FIGURE XXX
-\item (0.5) Consider the {\bf standard} normal distribution, $f_N(x)$.
+\item (0.5) Consider the normal distribution $f_N(x)$.
 \begin{enumerate}
-\item (0.1) What is the exact expression and approximate value of $f_N(\pm\sigma)$?
+\item (0.1) What is the exact expression and approximate value of $f_N(\mu\pm\sigma)$?
 \item (0.1) What is the exact expression and approximate value of $f_N(\mu)$?
-\item (0.1) Make a plot of $f_N(x)$.
+\item (0.1) Sketch or make a plot of $f_N(x)$. (If you're plotting, then use $\mu = 0$ and $\sigma = 1$.)
 \item (0.2) Label $\sigma$, $\mu$, and $f_N(\pm\sigma)$ on your plot, and plot the three points $(\mu,f_N(\mu))$, $(-\sigma,f_N(-\sigma))$, and $(\sigma,f_N(\sigma))$.
 \end{enumerate}
 
@@ -152,7 +152,7 @@ Hint: You will probably need to use polynomial long division.
 
 %------------------
 
-\pagebreak
+%\pagebreak
 \item (0.0) In Matlab, generate $10^5$ or so samples of $f_U(x)$ (remember: a sample of $f_U(x)$ will be a random number between $a$ and $b$), and check that the mean ($\mu$) and variance ($\sigma^2$) of the samples are close to the theoretical values, \ie $\mu \approx E[X]$ and $\sigma^2 \approx \Var[X]$. For the sake of comparison, use
 %
 \begin{equation*}
@@ -170,6 +170,7 @@ b = 5\sqrt{12}
 
 %------------------
 
+\pagebreak
 \item (1.3) The {\bf central limit theorem} is stated in \citet[][Section B.6]{AsterE2}:
 %
 \begin{quote}
@@ -190,19 +191,17 @@ The central limit theorem works for any kind of distribution. You will demonstra
 \item (0.1)
 \begin{itemize}
 \item Write the expression for $Z_1$.
-\item What are the minimum and maximum values of $Z_1$?
-\end{itemize}
-
+\item What are the minimum and maximum values of $Z_1$? \\
 Note: Your answer should not have $\mu$ or $\sigma$ in the expressions, since these can be written in terms of $a$ and $b$.
+\end{itemize}
 
 \item (0.4)
 \begin{itemize}
 \item Write the expression for $Z_2$.
-\item What are the minimum and maximum possible values of the sum $X_1 + X_2$?
+\item What are the minimum and maximum possible values of the sum $X_1 + X_2$? \\
+Note: Your answer should not have $\mu$ or $\sigma$ in the expressions, since these can be written in terms of $a$ and $b$.
 \item What are the minimum and maximum values of $Z_2$?
 \end{itemize}
-
-Note: Your answer should not have $\mu$ or $\sigma$ in the expressions, since these can be written in terms of $a$ and $b$.
 
 \item (0.8) By generating samples ($X$) from your $f_U(x)$, demonstrate the central limit theorem by showing a set of histograms of $Z_1$, $Z_2$, $Z_3$, and $Z_{10}$. To obtain each distribution of $Z_n$ (\refeq{Zn}), you will need to repeat the experiment $p$ times; try $p = 10^5$. Center your histograms between $\pm 4$.
 
@@ -220,20 +219,27 @@ Hint:
 \pagebreak
 \subsection*{Problem 3 (3.5). Estimating a covariance matrix from a set of samples}
 
-See the template script \verb+covrand.m+. Let $P$ be the number of samples and $M$ be the number of model parameters describing a single sample. The $i$th sample is represented by the $M \times 1$ vector~$\bem_i$.
+See the template script \verb+covrand.m+. Let $\nsample$ be the number of samples and $\nparm$ be the number of model parameters describing a single sample. The $j$th sample is represented by the $\nparm \times 1$ vector
+%
+\begin{equation}
+\bem_j = \bmu + \bem_j^{\rm C}
+\label{mj}
+\end{equation}
+%
+where $\bmu$ is a mean vector and $\bem_j^{\rm C}$ is a sample generated from covariance matrix $\bC$. Our subscript notation for $\bmu_\nsample$ and $\bC_\nsample$ denotes that these quantities are estimated from a set of $\nsample$ samples $\bem_j$.
 
-It may (or may not) help to attach some physical meaning to these samples. Think of each sample as the functional variation in a single dimension. The set of samples might represent, for example:
+It may (or may not) help to attach some physical meaning to these $\bem_j$ samples. Think of each sample as the functional variation in a single dimension. The set of $\nsample$ samples might represent, for example:
 %
 \begin{itemize}
 \item the variation in topography along different transects.
 
-\item the variation in height of an interval of an oscillating wire: each profile represents a different time.
+\item the variation in height of an interval of an oscillating wire: each profile represents a different snapshot in time.
 
-\item the variation of vertical ground displacement with time, as captured by a seismogram: each profile is for a different earthquake.
+\item the variation of vertical ground displacement with time, as captured by a seismogram: each profile is for a different earthquake, recorded at the same station.
 
 \end{itemize}
 %
-In this problem, the goal is to compute a sample covariance matrix, $\bC_P$, and to use it to estimate the covariance function, $C(d)$, that characterizes the samples.
+\textcolor{red}{In this problem, the goal is to compute a sample covariance matrix $\bC_\nsample$ from $\nsample$ samples. Then to use $\bC_\nsample$ to estimate the covariance function $C(d)$ that characterizes the samples.}
 
 %--------------
 
@@ -244,17 +250,17 @@ In this problem, the goal is to compute a sample covariance matrix, $\bC_P$, and
 % XXX MAKE THIS WORTH MORE POINTS XXX
 \item (0.3) Plot 8 samples in a $4 \times 2$ subplot figure, with one sample per subplot and with the same axis scale for each subplot (use \verb+ax0+ from \verb+covrand.m+). Plot each sample using the spatial discretization given by \verb+x+. Either use a default plotting style or \verb+'-.'+(but not \verb+'.'+).
 
-{\em For all $M$-dimensional vectors in the rest of the problem, plot them using the same $y$-axis range and with the spatial discretization given by \verb+x+.}
+{\em For all $\nparm$-dimensional vectors in the rest of the problem, plot them using the same $y$-axis range and with the spatial discretization given by \verb+x+.}
 
 \label{samps}
 
 %--------------
 
-\item (1.5) Use the first $P=10$ samples to do the following:
+\item (1.5) Use the first $\nsample=10$ samples to do the following:
 %
 \begin{enumerate}
 \item (0.3) Compute and plot the mean, $\bmu_{10}$.
-\item (0.7) Compute and plot the covariance matrix, $\bC_{10}$ (use \verb+imagesc+). Show your code to compute $\bC_{10}$, and do not use the black-box \verb+cov+ function\footnote{If you use {\tt cov} to check, you may need to transpose your matrix of samples to ensure that the resultant matrix is $M \times M$.}.
+\item (0.7) Compute and plot the covariance matrix, $\bC_{10}$ (use \verb+imagesc+). Show your code to compute $\bC_{10}$, and do not use the black-box \verb+cov+ function\footnote{If you use {\tt cov} to check, you may need to transpose your matrix of samples to ensure that the resultant matrix is $\nparm \times \nparm$.}.
 \item (0.5) Make a scatterplot (use \verb+plot+) of $(\bC_{10})_{kk'}$ versus $D_{kk'} = |x_k - x_{k'}|$, where $\bD$ is provided in \verb+covrand.m+. 
 
 Hint: Try \verb+plot(D,Csamp,'b.');+ where \verb+Csamp+ represents $\bC_{10}$.
@@ -342,7 +348,7 @@ What are the diagonal entries of $\bC$ and why?
 
 %------------------------
 
-%\pagebreak
+\pagebreak
 \subsection*{Problem 4 (3.0). Generating samples from a prescribed covariance}
 
 \citet[][p.~45]{Tarantola2005}:
@@ -352,13 +358,13 @@ What are the diagonal entries of $\bC$ and why?
 \end{quote}
 
 \noindent
-In Problem 3, you used a set of 1000 samples and computed a mean, $\bmu_{1000}$, and a covariance matrix, $\bC_{1000}$. You used $\bC_{1000}$ to estimate a covariance function, $C(d)$, with corresponding covariance matrix $\bC$. Here you will use $\bmu_{1000}$ and $\bC$ (not $\bC_{1000}$) to generate a set of samples that (hopefully) resembles the original samples.
+In Problem 3, you used a set of 1000 samples and computed a mean $\bmu_{1000}$ and a covariance matrix $\bC_{1000}$. You used $\bC_{1000}$ to estimate a covariance function $C(d)$ with corresponding covariance matrix $\bC$. Here you will use $\bmu_{1000}$ and $\bC$ (not $\bC_{1000}$) to generate a set of samples that (hopefully) resembles the original samples.
 
 \begin{enumerate}
 \item (1.5) 
 
 \begin{enumerate}
-\item (1.0) Generate 2000 samples of $\bC$, and save these as a set of $\bem_{\rm C}$ (each $\bem_{\rm C}$ is still $M \times 1$). {\bf Include the pertinent lines of your code.}
+\item (1.0) Generate 2000 samples of $\bC$, and save these as a set of $\bem^{\rm C}$ (each $\bem_j^{\rm C}$ is still $\nparm \times 1$). {\bf Include the pertinent lines of your code.}
 
 Hints:
 %
@@ -367,7 +373,7 @@ Hints:
 \item If $\bx = \bA\bw$ is a sample of $\bC$, what are $\bA$ and $\bw$?
 \end{itemize}
 
-\item (0.4) Add $\bmu_{1000}$ to each $\bem_{\rm C}$, then plot the first 8 samples (as in Problem 3-\ref{samps}). \\
+\item (0.4) Add $\bmu_{1000}$ to each $\bem^{\rm C}$, then plot the first 8 samples (as in Problem 3-\ref{samps}). \\
 Superimpose $\bmu_{1000}$ in each subplot.
 
 \item (0.1) Do your samples resemble those provided in Problem 3? (yes or no)
@@ -375,18 +381,18 @@ Superimpose $\bmu_{1000}$ in each subplot.
 
 %----------
 
-\item (0.5) Consider the samples of the covariance matrix, $\bem_{\rm C}$.
+\item (0.5) Consider the samples of the covariance matrix $\bem_j^{\rm C}$. (Note: these differ from $\bem_j$, see \refeq{mj}.)
 
-Compute the mean (\verb+mean+), standard deviation (\verb+std+), and norm of each of the 2000 $\bem_{\rm C}$, and show your results in three histogram plots. Do your results check with what you expect?
+Compute the mean (\verb+mean+), standard deviation (\verb+std+), and norm of each of the 2000 $\bem^{\rm C}$, and show your results in three histogram plots. Do your results check with what you expect?
 
-NOTE: Matlab's \verb+norm+ command will {\em not} be useful here. In calculating the norm, you will need to use a modified covariance matrix, $M\bC$, where $M \times M$ is the dimension of $\bC$. This will ensure that the norm of each $\bem_{\rm C}$ is about~1.
+NOTE: Matlab's \verb+norm+ command will {\em not} be useful here. In calculating the norm, you will need to use a modified covariance matrix, $\nparm\bC$, where $\nparm\times\nparm$ is the dimension of $\bC$. This will ensure that the norm of each $\bem^{\rm C}$ is about~1.
 
 %----------
 
-\item (0.8) Now generate a new $\bC$ using \verb+covC.m+ by making {\em only} one change: change \verb+icov+ to either 1 or 2. Repeat Problem 4-1 using the same set of Gassian random vectors, $\bw_i$, as before. This will allow for a true comparison between samples from the Gaussian or exponential covariance functions.
+\item (0.8) Now generate a new $\bC$ using \verb+covC.m+ by making {\em only} one change: change \verb+icov+ to either 1 or 2. Repeat Problem 4-1 using the same set of Gassian random vectors $\bw_j$, as before. This will allow for a true comparison between samples from the Gaussian or exponential covariance functions.
 
 \begin{enumerate}
-\item Generate samples of the new $\bC$, add $\bmu_{10000}$ to each sample. Plot the the first 8 samples.
+\item Generate samples of the new $\bC$, add $\bmu_{1000}$ to each sample. Plot the the first 8 samples.
 
 \item Describe the differences and similarities between the samples from the two different distributions.
 
@@ -400,7 +406,7 @@ NOTE: Matlab's \verb+norm+ command will {\em not} be useful here. In calculating
 
 %------------------------
 
-%\pagebreak
+\pagebreak
 \subsection*{Problem} \howmuchtime\
 
 %-------------------------------------------------------------

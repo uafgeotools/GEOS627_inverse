@@ -51,14 +51,14 @@ cp epicenter_template.m epicenter.m
 \begin{enumerate}
 \item (0.1) What are the unknown model parameters? How many?
 \item (0.1) What are the observations? How many?
-\item (0.1) What is the forward model (or ``mathematical model'')? (What is the mathematical relationship between model parameters and the observations?)
-\item (0.3) Is the forward model linear or nonlinear? Why?
+\item (0.2) What is the forward model (or ``mathematical model'')? (What is the mathematical relationship between model parameters and the observations?)
+\item (0.2) Is the forward model linear or nonlinear? Why?
 \item (0.1) What parameters are assumed to be fixed (or constant)?
 \end{enumerate}
 
 %---------------------
 
-\item (3.5) Using Matlab, implement the misfit function of Tarantola's Problem 7-1 (p.~253), which can be written in the following ways:
+\item (3.3) Using Matlab, implement the misfit function of Tarantola's Problem 7-1 (p.~253), which can be written in the following ways:
 %
 \begin{eqnarray}
 F(\bem) &=& \frac{1}{2} \sum_{i=1}^6 \frac{\left(t_i(\bem) - t_i^{\rm obs}\right)^2}{\sigma^2}
@@ -109,9 +109,10 @@ Consider the posterior probability density (eq. 7.9)
 \begin{equation}
 \sigma_{\rm M}(\bem) = \frac{1}{K} e^{-F(\bem)}.
 \end{equation}
-% 
-Assume that $\sigma_{\rm M}(\bem) = 0$ outside our selected region of 2D model space.
+
 \begin{enumerate}
+\item (0.0) Assume that $\sigma_{\rm M}(\bem) = 0$ outside our selected region of 2D model space. This means that the epicenter must lie within our 2D domain.
+
 \item (0.5) Using eq. 1.110,
 %
 \begin{equation}
@@ -158,7 +159,7 @@ Hint: What is the probability that the epicenter is somewhere in our model domai
 Consider the posterior probability density $\sigma_{\rm M}(\bem)$ from the previous problem. The goal of this problem is to generate samples of $\sigma_{\rm M}(\bem)$, whereby a ``sample'' is a $\bem = (x^s,y^s)$ that has passed the ``rejection method'' test.
 
 \begin{enumerate}
-\item (0.5) Make a sketch showing how you expect the samples to be distributed in the $xy$-plane. (IN other words, plot a few dozen dots.)
+\item (0.5) Make a sketch showing how you expect the samples to be distributed in the $xy$-plane. (In other words, plot a few dozen dots.)
 
 If you're confident that your algorithm in the next problem worked, then you can skip this sketch.
 
@@ -171,13 +172,13 @@ Hints:
 \begin{itemize}
 \item For background on the rejection method, see \verb+lab_sampling.m+ and \citet[][Section~2.3.2]{Tarantola2005}. (Note that the example in \verb+lab_sampling.m+ was for a function of one variable, not two.) 
 
-\item You will need to ``try'' some much larger number of samples (\verb+NTRY+) in order to get at least 50 samples that pass the test and are therefore representative of $\sigma_{\rm M}(\bem)$.
+\item You will need to ``try'' some much larger number of samples (\verb+NTRY+) in order to get at least 50 samples that pass the test and are therefore representative of $\sigma_{\rm M}(\bem)$. If you do not get 50 samples that pass the rejection test, try increasing \verb+NTRY+.
 
 \item Check that your \verb+NTRY+ test samples $\bem_i$ cover your full model space.
 
 \item Check that your evaluations of the test samples, $\sigma_{\rm M}(\bem_i)$, all range between 0 and 1.
 
-\item Plot the first 50 samples that pass the rejection test. If you do not get 50 samples that pass the rejection test, try increasing \verb+NTRY+.
+\item Plot the first 50 samples that pass the rejection test.
 \end{itemize}
 
 \item (0.5) Perform the following statistical analysis on the $\ge50$ samples. (The trends look better if you use more samples.)
@@ -216,7 +217,7 @@ t_6^{\rm obs} = 1.0\;{\rm s}
 \item (0.2) Why has it changed?
 \end{enumerate}
 
-\item (1.0) Keep the data outlier, but compute the solution using a different norm for the misfit function, the L1 norm:
+\item (1.0) Keep the data outlier, but compute the solution using an L1 norm for the misfit function:
 %
 \begin{eqnarray}
 F(\bem) &=& \sum_{i=1}^6 \frac{\left| t_i(\bem) - t_i^{\rm obs}\right|}{\sigma}
