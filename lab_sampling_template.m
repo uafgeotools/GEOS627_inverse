@@ -85,7 +85,7 @@ subplot(nr,nc,6); plot(xcurve,-log(pcurve));
 axis([xmin xmax -1 1.1*max(-log(pcurve))]);
 xlabel('x'); ylabel('F(x) = -ln(p(x))'); title('(f)  F(x)');
 
-break  % first break
+error  % first break
 
 %==========================================================================
 % ADDITIONAL PLOTTING TO UNDERSTAND THE PATTERN IN (c)
@@ -115,7 +115,7 @@ plot([xmin xmax],Pcut1*[1 1],'c--',[xmin xmax],Pcut2*[1 1],'c--');
 
 %==========================================================================
 
-break  % second break
+error  % second break
 
 % summary plot
 figure; nr=2; nc=2; 
@@ -131,7 +131,7 @@ end
 %==========================================================================
 % PRACTICE WITH IN-LINE FUNCTIONS AND PLOTTING
 
-break  % third break
+error  % third break
 
 % IMPLEMENT YOUR IN-LINE FUNCTION p HERE
 

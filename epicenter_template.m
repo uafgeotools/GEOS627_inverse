@@ -13,10 +13,10 @@ clear, close all, clc
 dx = 0.2;       % grid spacing, km
 
 
-% travel time between any two points
-t = @(x,y,xr,yr) ( YOUR FUNCTION HERE );
+% travel time between any two points (x,y) and (xri,yri)
+t = @(x,y,xri,yri) ( YOUR FUNCTION HERE );
 
-% N x 1 vector of predicted traveltimes
+% ndata x 1 vector of predicted traveltimes
 tm = @(x,y) ([  t(x,y,xr(1),yr(1))
                 t(x,y,xr(2),yr(2))
                 t(x,y,xr(3),yr(3))

@@ -119,7 +119,7 @@ switch iex
 end
          
 [m,n] = size(G);
-disp(sprintf('G is %i x %i with cond(G) = %.3e',m,n,cond(G)));
+disp(sprintf('G is %i x %i with cond(G) = %.3e [iex = %i]',m,n,cond(G),iex));
 
 if bfigure
     figure; imagesc(G);
@@ -128,7 +128,7 @@ if bfigure
     axis equal, axis tight;
     %set(gca,'xtick',[1:n],'ytick',[1:m]);
     colorbar;
-    title(['G matrix for ' stlab]);
+    title(sprintf('G matrix [%i x %i] for %s',size(G),stlab));
 end
 
 %==========================================================================
