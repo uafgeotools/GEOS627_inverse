@@ -4,9 +4,7 @@
 % by R. Aster, B. Borchers, C. Thurber
 %
 
-close all
-clc
-clear
+close all, clc, clear
 
 cmap = 'gray';
 %cmap = 'jet';
@@ -32,7 +30,7 @@ disp('Singular values:')
 diag(S)
 
 % Find dimensions of G
-[m,n] = size(G);
+[ndata,nparm] = size(G);
 
 % Find and display system rank
 disp('System rank:')
@@ -43,7 +41,7 @@ Vp = V(:,1:p)
 
 % Display null space vectors 
 disp('Model null space vectors')
-V0 = V(:,p+1:n)
+V0 = V(:,p+1:nparm)
 
 % Display null space vectors reshaped to match tomography example geometry
 disp('Model null space vectors reshaped into matrices')
@@ -101,7 +99,7 @@ display('Displaying diagonal elements of model resolution matrix (fig. 4)')
 % Spike resolution test
 
 % Construct spike model
-mtest = zeros(n,1);
+mtest = zeros(nparm,1);
 mtest(5) = 1;
 
 % Get noise free data for the spike model (forward problem)

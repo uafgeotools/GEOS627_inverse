@@ -106,11 +106,12 @@ After you are done, reset \verb+idouble=1+; from here on out, we will use \verb+
 
 \item (0.2) Compute the mean and standard deviation of each sample from the set of 1000 samples. Plot the means and standard deviations as two histograms.
 
-\item (1.0) Generate a Gaussian random field with (a) Gaussian covariance, (b) exponential covariance, and (c) circular covariance. In each case, {\em use the same Gaussian random vector} (note: this requires coding). Keep all other parameters fixed (as defaults), and use \verb+nx = 2^7+, \verb+ichol=0+, \verb+ifourier=1+, \verb+idouble=1+. 
+\item (1.0) Generate a Gaussian random field with (a) Gaussian covariance, (b) exponential covariance, and (c) circular covariance. In each case, {\em use the same Gaussian random vector} (note: this requires coding). Use \verb+nx = 2^7+, \verb+ichol=0+, \verb+ifourier=1+, \verb+idouble=1+, and keep all other parameters fixed (as defaults).
 %
 \begin{enumerate}
 \item Show the GRFs in a $3 \times 1$ subplot figure. \\
-In all plots use the same the color range \verb+caxis(3*sigma*[-1 1])+.
+In all plots use the same the color range \verb+caxis(3*sigma*[-1 1])+. \\
+Make sure that you are using \verb+nx = 2^7+.
 
 \item Show your modified lines of code.
 

@@ -11,10 +11,7 @@
 % (2) standardized (or scaled): divide by the standard deviation
 %
 
-clc
-clear
-close all
-format compact
+clc, clear, close all, format compact
 
 %-------------------------------------------------
 % load data
@@ -44,7 +41,7 @@ end
 
 disp(sprintf('%i observations, %i variables',n,p));
 
-%break
+error
 
 %-------------------------------------------------
 % Part I: figures from Matlab tutorial

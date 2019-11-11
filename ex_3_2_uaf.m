@@ -4,26 +4,23 @@
 % by R. Aster, B. Borchers, C. Thurber
 %
 
-clear
-close all
-clc
-format compact
+clear, close all, clc, format compact
 
 % Set constants
 % The noise variance
 noise = 0.05;
-% Discretizing values for M & N (210 data points)
-N = 211;
-M = 211;
+% Discretizing values for nparm and ndata (210 data points)
+nparm = 211;
+ndata = 211;
 
 % Generate time vector
-t = linspace(-5,100,N);
+t = linspace(-5,100,nparm);
 
 % Generate instrument impulse response as a critically-damped pulse
 % note: this is for plotting purposes only (only sigi and gmax are used)
 sigi = 10;
 if 1==1
-    for i = 1:N-1
+    for i = 1:nparm-1
       if (t(i)<0)
         g(i) = 0;
       else
@@ -37,7 +34,7 @@ if 1==1
 
     % Plot of instrument response to unit area ground acceleration impulse.
     figure(2)
-    plot(t(1:N-1),g,'k')
+    plot(t(1:nparm-1),g,'k')
     axis tight
     xlabel('Time (s)')
     ylabel('V')
@@ -49,8 +46,8 @@ end
 
 % Populate G matrix 
 % First the numerator which varies
-for i = 2:M
-  for j = 1:N-1
+for i = 2:ndata
+  for j = 1:nparm-1
     tp = t(j)-t(i);
     if (tp > 0)
       G(i-1,j) = 0;
@@ -63,7 +60,7 @@ end
 deltat = t(2)-t(1);
 G = G/gmax * deltat;
 
-break
+%error
 
 % Get SVD of G matrix
 [U,S,V] = svd(G);
@@ -82,17 +79,17 @@ disp('Displaying image of G matrix (fig. 1)')
 % True signal is two pulses of sig deviation
 sig = 2;
 % Find unscaled true signal model  
-mtrue = exp(-(t(1:N-1)-8).^2/(sig^2*2))'... 
-    + 0.5*exp(-(t(1:N-1)-25).^2/(sig^2*2))';
+mtrue = exp(-(t(1:nparm-1)-8).^2/(sig^2*2))'... 
+    + 0.5*exp(-(t(1:nparm-1)-25).^2/(sig^2*2))';
 % Rescale true signal model to have a max of 1
 mtrue = mtrue/max(mtrue);
 % Get true data without noise
 d = G*mtrue;
 % Add random normal noise to the datadata
-dn = G*mtrue + noise*randn(M-1,1);
+dn = G*mtrue + noise*randn(ndata-1,1);
 
 % Using SVD with all 210 singular values
-nkeep = N-1;
+nkeep = nparm-1;
 % Find Up, Vp, Sp
 Up = U(:,1:nkeep);
 Vp = V(:,1:nkeep);
@@ -113,7 +110,7 @@ disp('Displaying semilog plot of singular values (fig. 3)')
 
 % Plot true model
 figure(4)
-plot(t(1:N-1),mtrue,'k')
+plot(t(1:nparm-1),mtrue,'k')
 xlim([-5 100])
 ylim([0 1])
 axis tight
@@ -124,7 +121,7 @@ disp('Displaying true model (fig. 4)')
 
 % Display predicted data using noise free model
 figure(5)
-plot(t(1:N-1),d,'k')
+plot(t(1:nparm-1),d,'k')
 xlabel('Time (s)')
 ylabel('V')
 axis tight
@@ -132,7 +129,7 @@ disp('Displaying predicted data from true model (without noise) (fig. 5)')
 
 % Display predicted data plus random independent noise
 figure(6)
-plot(t(1:N-1),dn,'k')
+plot(t(1:nparm-1),dn,'k')
 xlim([-5 100])
 xlabel('Time (s)')
 ylabel('V');
@@ -143,7 +140,7 @@ disp(['Displaying predicted data from true model plus independent noise'...
 
 % Display generalized inverse solution for noise-free data
 figure(7)
-plot(t(1:N-1),mperf,'k')
+plot(t(1:nparm-1),mperf,'k')
 xlim([-5 100])
 ylim([0 1])
 xlabel('Time (s)')
@@ -154,7 +151,7 @@ disp(['Displaying generalized inverse solution for noise-free data'...
 
 % Display generalized inverse solution for noisy data
 figure(8)
-plot(t(1:N-1),mn,'k')
+plot(t(1:nparm-1),mn,'k')
 xlabel('Time (s)')
 axis tight
 ylabel('Acceleration (m/s^2)');
@@ -175,7 +172,7 @@ m2 = Vp*inv(Sp)*Up'*dn;
 
 % Display generalized inverse solution for noisy data
 figure(9)
-plot(t(1:N-1),m2,'k')
+plot(t(1:nparm-1),m2,'k')
 xlabel('Time (s)')
 ylabel('Acceleration (m/s^2)');
 axis tight
@@ -201,7 +198,7 @@ disp(['Displaying image of resolution matrix for truncated SVD solution'...
 
 % Display a column from the model resolution matrix for truncated SVD solution
 figure(11)
-plot(t(1:N-1), Rm(80,:),'k')
+plot(t(1:nparm-1), Rm(80,:),'k')
 axis tight
 xlabel('Time (s)')
 ylabel('Element Value')
@@ -214,7 +211,7 @@ disp('Animating TSVD solutions as p increases (fig. 12)')
 
 % the maximum p to use, the fit model and the diagonal elements
 p = rank(G);
-m = zeros(N-1,1);
+m = zeros(nparm-1,1);
 ss = diag(S);
 
 figure(12)

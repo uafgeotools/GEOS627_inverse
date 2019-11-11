@@ -50,7 +50,7 @@ Interferogram used in this lab exercise. This is Okmok volcano, which is the nor
 
 \begin{itemize}
 \item The goal of this lab is to understand the principles of InSAR processing and inverse problems. 
-\textcolor{red}{\bf No Matlab or data are needed to answer the lab questions, though computer plotting may be helpful.}
+\textcolor{red}{\bf Matlab may be useful for plotting, but it is not required to answer the lab questions.}
 
 \item Lab time:
 %
@@ -164,14 +164,18 @@ Therefore, we are actually interested in the (signed magnitude of the) projectio
 %
 where the look vector is given by
 %
-\begin{equation}
+\begin{eqnarray}
 %\bLh' = (-\sin l \cos t,\; \sin l \sin t,\; \cos l),
-\bLh = (\sin l \cos t,\; -\sin l \sin t,\; -\cos l),
+\bLh &=& \hat{L}_x \bxh + \hat{L}_y \byh + \hat{L}_z \bzh
+= (\hat{L}_x, \hat{L}_y, \hat{L}_z)
+\\
+&=& \sin l \cos t\,\bxh -\sin l \sin t\,\byh -\cos l\,\bzh
+= (\sin l \cos t,\; -\sin l \sin t,\;  -\cos l)
 % (sin th cos ph, sin th sin ph, cos th )
 % --> t = -ph so -sin(t) = sin(-t) = sin(ph)
 % --> l = pi - th
 \label{L}
-\end{equation}
+\end{eqnarray}
 %
 where $l$ is the look angle measured from the nadir direction (``downward'') and $t$ is the satellite track angle measured clockwise from geographic north. The look direction, in map view, is perpendicular to the track direction and points to the right (\refFig{proj}). All vectors are represented in an east-north-up basis.
 
@@ -182,7 +186,8 @@ d_i \equiv \bu_i \cdot \bLh
 \label{forwardLOS}
 \end{equation}
 %
-If there are $N$ points (pixels) in our interferogram, then we would have an $N \times 1$ vector, $\bd$, representing our predicted look displacements for a particular Mogi source.
+If there are $\ndata$ points (pixels) in our interferogram, then we would have an $\ndata \times 1$ vector $\dvec$ representing our observed look displacements and
+$\bd$ representing our predicted look displacements for a particular Mogi source.
 
 We represent a \textcolor{red}{\bf forward problem} as
 %
@@ -190,13 +195,13 @@ We represent a \textcolor{red}{\bf forward problem} as
 \bg(\bem) = \bd
 \end{equation}
 %
-where $\bg(\cdot)$ describes the forward model in \refEq{forward}, $\bem$ is the (unknown) Mogi model, and $\bd$ is the predicted interferogram.
+where $\bg(\cdot)$ describes the forward model in \refEqii{forward}{forwardLOS}, $\bem$ is the (unknown) Mogi model, and $\bd$ is the predicted interferogram.
 
-The \textcolor{red}{\bf inverse problem} seeks to determine the optimal $\bem$ that minimizes the differences between predictions $\bg(\bem)$ and observations $\dvec$.
+The \textcolor{red}{\bf inverse problem} seeks to determine the optimal $\bem$ that minimizes the differences between predictions $\bg(\bem) = \bd$ and observations $\dvec$.
 
 %---------------
 
-%\pagebreak
+\pagebreak
 \subsection*{Discussion questions [50 min]}
 
 \begin{enumerate}
@@ -247,15 +252,15 @@ Is it linear with any of the source parameters?
 
 \renewcommand{\theenumi}{\Alph{enumi}}
 \begin{enumerate}
-\item $t=0^\circ$ \vspace{1cm}
-\item $l = 0^\circ$ \vspace{1cm}
-\item $l = 90^\circ$ (consider the motion of a mountain, vertically and horizontally) \vspace{1cm}
+\item $t=0^\circ$ \vspace{2cm}
+\item $l = 0^\circ$ \vspace{2cm}
+\item $l = 90^\circ$ (consider the motion of a mountain, vertically and horizontally) \vspace{2cm}
 \end{enumerate}
 
 \end{enumerate}
 
 %-------------------------------------------------------------
-%\pagebreak
+\pagebreak
 \bibliographystyle{agu08}
 \bibliography{carl_abbrev,carl_main,carl_source,carl_him,carl_alaska,carl_gps}
 %-------------------------------------------------------------
