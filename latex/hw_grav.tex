@@ -46,7 +46,7 @@ Note that the gravity example is rooted in Chapter 1 (Examples 1.4 and 1.5).
 \item Relevant function: \verb+tsvd.m+ (credit: Regularization Toolbox \citep{Hansen})
 \item Template scripts: \verb+grav.m+, \verb+ch3p5.m+
 %\item Optional utility scripts: \verb+collocate.m+, \verb+plotconst_mod.m+
-\item Here $\ndata$ is the number of data, and $\nparm$ is the number of model parameters.
+%\item Here $\ndata$ is the number of data, and $\nparm$ is the number of model parameters.
 \item The \textcolor{red}{the red text sections of Problems 1-\ref{prob1} though 1-\ref{prob2}} denote the questions to be repeated in Problem~2 for the forward model in \refEq{dy}. Points for Problem~2 are worth half what is listed for Problem 1.
 \end{itemize}
 
@@ -72,7 +72,7 @@ K(\dv,\mv) = \frac{\dep}{\left(\dep^2 + (\dv-\mv)^2\right)^{3/2}}
 \label{Kxy}
 \end{equation}
 %
-(Dimensional constants such as the gravity constant have been omitted.) In discrete form, we can write the relation between measurements $\bd = (g_1,\ldots,g_\ndata)$ of gravity variations at $\ndata$ points along a line at the surface and variations of the density $\bem = (f_1,\ldots,f_\nparm)$ at $\nparm$ points along a subsurface line as a linear model
+(Dimensional constants such as the gravity constant have been omitted.) In discrete form, we can write the relation between predictions $\bd = (g_1,\ldots,g_\ndata)$ of gravity variations at $\ndata$ points along a line at the surface and variations of the density $\bem = (f_1,\ldots,f_\nparm)$ at $\nparm$ points along a subsurface line as a linear model
 %
 \begin{equation}
 %\bd = \bG\bem + \bepsilon,
@@ -80,13 +80,14 @@ K(\dv,\mv) = \frac{\dep}{\left(\dep^2 + (\dv-\mv)^2\right)^{3/2}}
 \end{equation}
 %
 %where $\bepsilon$ is a vector of measurement errors, and
-the $\ndata \times \nparm$ design matrix $\bG$ is a discrete representation of the integral operator in \refEq{Kxy}. The vector $\bem$ of density variations plays the role of the regression coefficients. The vector $\bd$ of gravity variations is the response variable.
+the $\ndata \times \nparm$ design matrix $\bG$ is a discrete representation of the integral operator in \refEq{Kxy}.
+%The vector $\bem$ of density variations plays the role of the regression coefficients. The vector $\bd$ of gravity variations is the response variable.
 
-The file \verb+grav.m+ provides $\bd$, the measurements of gravity variations at $\ndata = \numdataG$ equally spaced points along the line $0 \le \dv \le 1$. The standard deviation of the measurement errors is assumed to be $\sigma \approx 0.1$.
+The file \verb+grav.m+ provides $\dvec$, the measurements of gravity variations at $\ndata = \numdataG$ equally spaced points along the line $0 \le \dv \le 1$. The standard deviation of the measurement errors is assumed to be $\sigma \approx 0.1$.
 
 You will be asked to compute
 %The file \verb+integral.dat+ contains
-the $\ndata \times \nparm$ matrix $\bG$ that relates gravity variations at the $\ndata=\numdataG$ points along the surface to density variations $\bem$ at $\nparm = \numparmG$ points at depth $\dep = 0.25$ below the points of the surface measurements. 
+the $\ndata \times \nparm$ matrix $\bG$ that relates gravity variations $\dvec$ at the $\ndata=\numdataG$ points along the surface to density variations $\bem$ at $\nparm = \numparmG$ points at depth $\dep = 0.25$ below the points of the surface measurements. 
 
 %===================
 
@@ -166,7 +167,7 @@ Show your Matlab code.
 
 Hint: Use \verb+tsvd.m+.
 
-\item (0.8) \textcolor{red}{Plot an $\ssL$-curve \citep[][p.~95]{AsterE2} for $\ntrun = 1,\ldots,\ndata$.} \\
+\item (0.8) \textcolor{red}{Plot an $\ssL$-curve \citep[][p.~95]{AsterE2} for $\ntrun = 1,\ldots,p$.} \\
 Plot both axes on a $\log_{10}$ scale.
 
 \item (0.4) \textcolor{red}{List the $\ntrun$ value that you would pick based on four methods (see table). Briefly justify your choices.}
@@ -200,7 +201,8 @@ f(\mv) = \sin(\pi\mv) + 0.5 \sin(2\pi\mv)
 and adding pseudo-random noise to the implied gravity variations.
 
 \begin{enumerate}
-\item (0.4) Directly compare (in a plot) your regularized estimate $\bem_{\ntrun}$ with the exact solution $f_k = f(\mv_k)$.
+\item (0.4) Directly compare (in a plot) your regularized estimate $\bem_{\ntrun}$ with the exact solution.
+% NOTE: Allow student to either show $f_k = f(\mv_k)$ or $f(\mv)$ as a smooth curve
 \item (0.1) Was your $\ntrun$ a good choice?
 \end{enumerate}
 
@@ -227,8 +229,8 @@ The data are listed to four digits only; therefore we can assume that there are 
 \bigskip\noindent
 Complete \textcolor{red}{the red text sections of Problems 1-\ref{prob1} though 1-\ref{prob2}} for the forward model in \refEq{dy}.
 
-\noindent
-For plotting the discretized models, try to use \verb+plotconst_mod.m+ (see example in \verb+ch3p5.m+); this function is similar to Matlab's \verb+stairs+ function.
+%\noindent
+%For plotting the discretized models, try to use \verb+plotconst_mod.m+ (see example in \verb+ch3p5.m+); this function is similar to Matlab's \verb+stairs+ function.
 
 %------------------------
 

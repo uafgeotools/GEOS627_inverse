@@ -8,7 +8,7 @@
 clear, close all, clc
 
 % vector of gravity observations
-d = [
+dobs = [
    3.200806372256319
    4.281623543773417
    5.000263689234144
@@ -25,8 +25,8 @@ d = [
    1.333121959786504
    0.949130251286033 ];
 
-ndata = length(d);  % number of data
-nparm = ndata - 1;  % number of model parameters
+ndata = length(dobs);   % number of data
+nparm = ndata - 1;      % number of model parameters
 
 % construct discretization vector for model (density)
 ximin = 0;

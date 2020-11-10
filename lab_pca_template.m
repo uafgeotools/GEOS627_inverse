@@ -10,7 +10,7 @@ clc, clear, close all
 % load the data, compute correlations, and make scatterplots
 load_pca_data;
 [ndata,nparm] = size(X);
-xinds = [1:p];    
+xinds = [1:nparm];    
 
 % scatterplot matrix: uncentered, unstandardized
 figure, gplotmatrix(X,[],[],[],[],[],[],[],vlabslong,vlabslong), 
