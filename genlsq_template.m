@@ -1,0 +1,1 @@
+../GEOS626_seis_matlab/genlsq_template.m
