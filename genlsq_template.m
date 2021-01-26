@@ -1,1 +1,0 @@
-../seismo/genlsq_template.m
