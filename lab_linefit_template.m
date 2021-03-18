@@ -1,7 +1,6 @@
 %
 % lab_linefit.m
-% Carl Tape, GEOS 626, Applied Seismology
-% Carl Tape, GEOS 627, Inverse Problems and Parameter Estimation
+% Applied Seismology, GEOS 626, University of Alaska Fairbanks
 %
 % This program introduces the least squares method for the example of
 % fitting a line (i.e., a model with two parameters) to a set of scattered
@@ -19,12 +18,12 @@ close all
 %---------------------------
 
 % USER PARAMETERS (CHANGE THESE)
-ndata = 50;                 % number of observations
+n = 50;                     % number of observations
 sigma = 0.3;                % standard deviations of added errors
 
 % TARGET model vector (y-intercept, slope)
 mtar = [2.1 -0.5]';
-nparm = length(mtar);       % number of model parameters
+m = length(mtar);           % number of model parameters
 
 %---------------------------
 
@@ -32,58 +31,57 @@ nparm = length(mtar);       % number of model parameters
 % x is a vector of x_i locations where your measurements y_i will be made
 xmin = -2;
 xmax = 2;
-x = linspace(xmin,xmax,ndata)'; % input x-values
-G = [ones(ndata,1) x];          % ndata by nparm design matrix
+x = linspace(xmin,xmax,n)'; % input x-values
+G = [ones(n,1) x];          % n by m design matrix
                          
 % display dimensions of these variables
 whos
 
 % generate errors
-e = sigma * randn(ndata,1); % normally distributed random numbers
+e = sigma * randn(n,1); % normally distributed random numbers
 
 % generate target 'data' with errors added
 dtar = G*mtar;
-dobs = dtar + e;
+d = dtar + e;
 
 % optional: add one big anomaly
 %d(1) = d(1) + 1000*sigma;
 
 % SOLVE: compute least squares solution, estimates, and estimated variance.
 % (We show several options for mest, each with the same result.)
-mest = G\dobs
+mest = G\d
 %mest = inv(G'*G)*G'*d;             % note matlab's warning about using inv
 %mest = pinv(G)*d;
 %mest = flipud(polyfit(x,d,1)')     % specific to this problem only
 
-d = G*mest;          % estimated predictions
-res = dobs - d;      % residuals
+dest = G*mest;          % estimated predictions
+res = d - dest;         % residuals
 
 figure; msize = 10;
-stres = sprintf('std(res) = %.3f',std(res));
+stres = [' std(res) = ' sprintf('%.3f', std(res) )];
 
 subplot(2,1,1); hold on;
-plot(x,dobs,'.','markersize',msize);
+plot(x,d,'.','markersize',msize);
 plot(x,dtar,'c--','linewidth',3);
-plot(x,d,'r--','linewidth',3);
+plot(x,dest,'r--','linewidth',3);
 legend('data','mtar','mest','location','southwest');
-xlabel('x'); ylabel('d');
+xlabel(' x'); ylabel(' d');
 title({sprintf('Estimated model : m = (%.2f, %.2f)',mest(1),mest(2)), stres})
 grid on; axis equal;
 axis([min(x) max(x) min(G*mtar)-2*sigma max(G*mtar)+2*sigma]);
 
 subplot(2,2,3);
 plot(res,'.','markersize',msize); grid on; ylim([-1 1]);
-xlabel('Observation index'); ylabel('Residual, d - dobs'); title(stres);
+xlabel(' Observation index'); ylabel(' Residual, d - dest'); title(stres);
 
 subplot(2,2,4);
 edges = [-1.05:0.1:1.05]; [Nh,bin] = histc(res,edges);
 bar(edges,Nh,'histc'); xlim([min(edges) max(edges)]);
-xlabel('Residual'); ylabel('Number'); 
-title(sprintf('ndata = %i',ndata));
+xlabel(' Residual'); ylabel(' Number'); title([' Ntotal = ' num2str(n)]);
 
 %fontsize(11); orient tall, wysiwyg
 
-%break
+%error
 
 %---------------------------
 % generate a plot showing the residual sum of squares (RSS) as a function of model space
@@ -101,44 +99,40 @@ m1_vec = linspace(mtar(1)-m1_ran, mtar(1)+m1_ran, nx);
 m2_vec = linspace(mtar(2)-m2_ran, mtar(2)+m2_ran, nx);
 [M1,M2] = meshgrid(m1_vec,m2_vec);
 [a,b] = size(M1);
-ngrid = a*b;                    % number of gridpoints in model space
-m1 = reshape(M1,1,ngrid);
-m2 = reshape(M2,1,ngrid);
+ng = a*b;                       % number of gridpoints in model space
+m1 = reshape(M1,1,ng);
+m2 = reshape(M2,1,ng);
 
 % compute misfit function (and gradient)
-RSSm = zeros(1,ngrid);          % initialize misfit function
-% INITIALIZE gamma(m) HERE
+RSSm = zeros(ng,1);             % initialize misfit function
+% INITIALIZE GRADIENT HERE
 
-for kk=1:ngrid
+
+for kk=1:ng
     mtry = [m1(kk) m2(kk)]';    % a sample from model space
     dtry = G*mtry;              % predictions from the model
-    res = dtry - dobs;          % residuals between data and predictions
-    RSSm(kk) = sum(res.*res);   % residual sum of squares
+    res = d - dtry;             % residuals between data and predictions
+    RSS = sum(res.*res);        % residual sum of squares
+    RSSm(kk) = RSS;
     
-    % COMPUTE gamma(m) HERE
+    % COMPUTE GRADIENT HERE [DO NOT USE MATLAB'S gradient FUNCTION]
 
 end
 
 % plot the misfit function
 nc = 30;    % number of contours to plot
-figure;
-%-------------
-% experiment with plotting options
-contourf(M1,M2,reshape(RSSm,a,b),nc); shading flat; 
-%pcolor(M1,M2,reshape(RSSm,a,b)); shading flat; 
-%scatter(m1,m2,6^2,RSSm,'filled');
-%-------------
-axis equal, axis tight; hold on;
+figure; hold on;
+contourf(M1,M2,reshape(RSSm,a,b),nc); shading flat
+%pcolor(M1,M2,reshape(RSSm,a,b)); shading flat
+%scatter(m1,m2,6^2,RSSm,'filled'); shading flat;
 l1 = plot(mtar(1),mtar(2),'ws','markersize',10,'markerfacecolor','k');
 l2 = plot(mest(1),mest(2),'wo','markersize',10,'markerfacecolor','r');
 legend([l1,l2],'target model','estimated model');
+axis equal, axis tight;
 caxis([-1e-6 0.5*max(RSSm)]); colorbar
 xlabel('m1, y-intercept');
 ylabel('m2, slope');
 title('Residual sum of squares');
-
-% 3D surface (rotate the figure in 3D using the mouse)
-%figure; surf(M1,M2,reshape(RSSm,a,b));
 
 % PLOT GRADIENT HERE WITH quiver COMMAND ('help quiver')
 
