@@ -28,7 +28,7 @@ Last compiled: \today
 \vspace{-0.5cm}
 \subsection*{Overview}
 
-The objective of this lab is to introduce the concepts of forward and inverse problems by exploring the example of fitting a line to scattered data. We also want to develop some basic capabilities in Matlab, such as vector-matrix operations and plotting.
+The objective of this lab is to introduce the concepts of forward and inverse problems by exploring the example of fitting a line to scattered data. We also want to develop some basic capabilities in Python, such as vector-matrix operations and plotting.
 
 \begin{enumerate}
 \item Write down the forward model $d_i = m_1 + m_2 x_i$ in schematic matrix form $\bd = \bG\bem$.
@@ -42,7 +42,7 @@ The objective of this lab is to introduce the concepts of forward and inverse pr
 \vertgap
 \vertgap
 
-\item Run the script \verb+lab_linefit.m+ and identify the key parts of the code associated with the forward problem and the inverse problem. What is the Matlab syntax for $\bem^T$, $\bG\bem$, and $\bG^T\bd$?
+\item Run the script \verb+lab_linefit.ipynb+ and identify the key parts of the code associated with the forward problem and the inverse problem. What is the syntax for $\bem^T$, $\bG\bem$, and $\bG^T\bd$?
 
 \vertgap
 
@@ -50,8 +50,8 @@ The objective of this lab is to introduce the concepts of forward and inverse pr
 
 \vertgap
 
-\item What are the different ways in Matlab to compute the solution vector $\bem$? \\
-(Type \verb+help \+ or \verb+help inv+ for details.)
+\item What are the different ways to compute the solution vector $\bem$? \\
+(XXX Type \verb+help \+ or \verb+help inv+ for details. XXX)
 
 \vertgap
 
@@ -74,21 +74,23 @@ How does it change if you set $\sigma = 0$?
 \vertgap
 
 %\pagebreak
-\item Now comment out the outlier. Comment out the \verb+break+ statement, then run the last block of code. Make sure you understand what is being plotted and how it is calculated.
+\item Now comment out the outlier, then examine the last block of code. Make sure you understand what is being plotted and how it is calculated.
 %
 \begin{itemize}
 \item What is the dimension of model space?
 \item Fill out the table below.
-\item In the code, why is the operation \verb+res.*res+ used instead of \verb+res*res+, \verb+res'*res+, or \verb+res*res'+?
+%\item XXX In the code, why is the operation \verb+res.*res+ used instead of \verb+res*res+, \verb+res'*res+, or \verb+res*res'+? XXX
 \end{itemize}
 
-\vertgap
 \begin{tabular}{c|c|c|c}
 \hline
-variable & matlab variable  & dimension      & description \\ \hline\hline
+variable & code variable   & dimension      & description \\ \hline\hline
+         & \verb+ndata+    &                &              \\ \hline
+         & \verb+nparm+    &                &              \\ \hline
          & \verb+dobs+     &                &              \\ \hline
          & \verb+G+        &                &              \\ \hline
-$\misfitvar(\bem)$  & --              &                &              \\ \hline
+$\misfitvar(\bem)$  &      &                &              \\ \hline
+         & \verb+ngrid+    &                &              \\ \hline
 ---      & \verb+RSSm+     &                &              \\ \hline
 \bem     & \verb+mtry+     & $2 \times 1$   & \hspace{3cm} \\ \hline
          & \verb+dtry+     &                &              \\ \hline
@@ -97,11 +99,15 @@ $\misfitvar(\bem)$  & --              &                &              \\ \hline
 --       & \verb+gammam+   & $2 \times n_g$ &  \\ \hline
 \end{tabular}
 
+%==============================================================
+% GEOS 626 STOP HERE THE FIRST TIME THROUGH
+%==============================================================
+
 \item Referring to the class notes ``Taylor series and least squares'' (\verb+notes_taylor.pdf+) compute the gradient $\bgamma(\bem)$ for the same grid of $\bem$ that was used to plot the misfit function.
 
 Hint: one line of code (plus one line to initialize $\bgamma(\bem)$)
 
-Matlab's \verb+gradient+ function will not help you here, since you need an exact evaluation of the gradient, whereas Matlab will provide a numerical gradient for a grid of pre-computed values.
+The \verb+gradient+ function will not help you here, since you need an exact evaluation of the gradient, whereas \verb+gradient+ will provide a numerical gradient for a grid of pre-computed values.
 
 \vertgap
 
@@ -115,7 +121,7 @@ What is the relationship between the contours of $F(\bem)$ and $\bgamma(\bem)$?
 
 How does $\|\bgamma(\bem)\|$ vary with respect to $\bem_{\rm est}$? \\
 % it gets larger 
-Bonus: Use \verb+surf+ to plot $\|\bgamma(\bem)\|$. What shape is it?
+Bonus: Use \verb+plot_surface+ to plot $\|\bgamma(\bem)\|$. What shape is it?
 % a cone
 
 \vertgap
